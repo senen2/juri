@@ -1,0 +1,41 @@
+Actores
+
+Proveedores
+Se crean e ingresan como myfinan por index.html prov.myfinan.com
+Debe tener una lista de clientes?
+	Como sabe cual es el cliente que le hace el pedido?
+
+Clientes
+Se crean al vuelo, ingresan por cliente.html pedi.myfinan.com
+Debe tener una lista de proveedores?
+	Como elige al proveedor?
+
+El proveedor
+
+Crea una cuenta
+Sube los productos
+Mantenimiento
+	Precios
+	Existencia
+	Nuevos productos
+
+	Se hace subiendo otra vez los productos
+		Se puede reemplazar todo el archivo
+		O se puede actualizar por codigo
+
+
+El cliente
+
+Selecciona el proveedor
+Se identifica con el numero de telefono
+	El telefono me da la dirección
+Busca los productos uno por uno en un buscador y escribe la cantidad
+Acepta el pedido
+
+El proveedor
+
+Recibe el pedido por email
+Avisa que el pedido fue aceptado
+Lo despacha y lo anota en el sistema
+
+Por ahora no se va a manejar el pago

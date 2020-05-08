@@ -1,0 +1,19 @@
+Cli
+	Seleccionar proveedor
+
+	no permitir cambio de proveedor cuando haya empezado un pedido
+		o mejor, abrir una pagina de pedido por cada proveedor
+		o mejor aun, borrar hasta la selección del proveedor
+
+	grabar nodoruta para cli
+
+	Historia de pedidos
+		para esto necesita login
+		repetir pedido
+		repetir producto
+
+Prov
+
+	usar precio o solo cantidades
+
+	
