@@ -2,7 +2,7 @@
  * @author botpi
  */
 
-function inicioLee()
+function inicio()
 {
 	// encabezado = getCookie("encabezado");
 	encabezado = localStorage.getItem("encabezado");

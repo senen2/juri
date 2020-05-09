@@ -30,7 +30,7 @@ def SubeArchivo(datos):
     iddoc = bd.UltimoID()
 
     text = texto.split('\n')    
-    bd.Ejecuta("truncate table parrafos")
+    # bd.Ejecuta("truncate table parrafos")
     for p in text:
         if p.strip():
             bd.Ejecuta("insert into parrafos (iddoc, texto) values(%s, '%s')"%(iddoc, p))
