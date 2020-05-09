@@ -11,6 +11,8 @@ function inicioLee()
 		encabezado="'',''";
 	leeServidor();
 	LeeDocsJ(dibDocs);
+	$("#texto").val('');
+	$("#texto").hide();
 }
 
 function dibDocs(datos)
@@ -21,16 +23,19 @@ function dibDocs(datos)
 function docSel()
 {
 	iddoc = $('#docs').val();
-	if (iddoc)
+	if (iddoc) {		
 		LeeDocJ(iddoc, dibTexto);
+		$("#busy").show();
+	}
 }
 
 function dibTexto(datos)
 {
 	if (datos) {
-		gtexto = datos[0];
+		gtexto = datos;
 		var userLang = navigator.language || navigator.userLanguage; 
-
-		$("#texto").val(gtexto.texto);
+		$("#busy").hide();
+		$("#texto").val(gtexto);
+		$("#texto").show();
 	}
 }

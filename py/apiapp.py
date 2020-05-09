@@ -9,8 +9,7 @@ from subapp import *
 from comun import *
 from convtexto import *
 
-# from csv import reader
-import pandas as pd
+# import pandas as pd
 
 def Login(email, clave):
     bd = DB(nombrebd="textos")
@@ -22,49 +21,21 @@ def Login(email, clave):
     bd.cierra()
     return None
 
-def SubeArchivo1(datos):
-    bd = DB(nombrebd="textos")
-    texto = pdf(datos['filename'])
-    capitulo = "capitulo 1"
-    texto = texto.replace('. \n', '.¬').replace(': \n', ':¬').replace('? \n', '?¬')\
-        .replace('\n', '').replace('¬', '\r\n\r\n').replace('  Š','\r\n- ').replace('Š',' - ')\
-        .replace('  ', ' ').replace('  ', ' ')
-    bd.Ejecuta("insert into docs (texto, titulo, num) values('%s', '%s', %s)"%(texto, capitulo, datos['num']))
-    bd.cierra()
-    return texto
-
 def SubeArchivo(datos):
     bd = DB(nombrebd="textos")
     texto1 = pdf(datos['filename'])
     capitulo = "capitulo 1"
-    # texto = puleTexto(texto1)
     texto = texto1.replace("'", "''")
     bd.Ejecuta("insert into docs (titulo, num) values('%s', %s)"%(capitulo, datos['num']))
     iddoc = bd.UltimoID()
-    # text1 = texto1.split('. \n').split(': \n').split('? \n')
-    # for p in text1:
 
     text = texto.split('\n')    
     bd.Ejecuta("truncate table parrafos")
-    # i = 0
     for p in text:
-        # print(p, iddoc)
         if p.strip():
-            # print(p)
             bd.Ejecuta("insert into parrafos (iddoc, texto) values(%s, '%s')"%(iddoc, p))
-            bd.commit()
-            # i += 1
-
-    # sql = "insert into docs (texto, titulo, num) values('%s', '%s', %s)"
-    # values = (texto, capitulo, datos['num'])
-    # bd.c.execute(sql, values)
     bd.cierra()
     return texto
-
-def puleTexto(texto):
-    return texto.replace('. \n', '.¬').replace(': \n', ':¬').replace('? \n', '?¬')\
-        .replace('\n', '').replace('¬', '\r\n\r\n').replace('  Š','\r\n- ').replace('Š',' - ')\
-        .replace('  ', ' ').replace('  ', ' ')
 
 def LeeUltTextoJ(num):
     bd = DB(nombrebd="textos")
@@ -79,11 +50,12 @@ def LeeDocsJ():
     bd.cierra()
     return rows
 
-def LeeDocJ(id):
+def LeeDocJ(iddoc):
     bd = DB(nombrebd="textos")
-    rows = bd.Ejecuta("select * from docs where id=%s"%id)
+    rows = bd.Ejecuta("select texto from parrafos where iddoc=%s"%iddoc)
+    resp = '\n\n'.join([x['texto'] for x in rows])
     bd.cierra()
-    return rows
+    return resp
 
 
 
