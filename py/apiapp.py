@@ -22,7 +22,7 @@ def Login(email, clave):
     bd.cierra()
     return None
 
-def SubeArchivo(datos):
+def SubeArchivo1(datos):
     bd = DB(nombrebd="textos")
     texto = pdf(datos['filename'])
     capitulo = "capitulo 1"
@@ -33,9 +33,43 @@ def SubeArchivo(datos):
     bd.cierra()
     return texto
 
+def SubeArchivo(datos):
+    bd = DB(nombrebd="textos")
+    texto1 = pdf(datos['filename'])
+    capitulo = "capitulo 1"
+    # texto = puleTexto(texto1)
+    texto = texto1.replace("'", "''")
+    bd.Ejecuta("insert into docs (titulo, num) values('%s', %s)"%(capitulo, datos['num']))
+    iddoc = bd.UltimoID()
+    # text1 = texto1.split('. \n').split(': \n').split('? \n')
+    # for p in text1:
+
+    text = texto.split('\n')    
+    bd.Ejecuta("truncate table parrafos")
+    # i = 0
+    for p in text:
+        # print(p, iddoc)
+        if p.strip():
+            # print(p)
+            bd.Ejecuta("insert into parrafos (iddoc, texto) values(%s, '%s')"%(iddoc, p))
+            bd.commit()
+            # i += 1
+
+    # sql = "insert into docs (texto, titulo, num) values('%s', '%s', %s)"
+    # values = (texto, capitulo, datos['num'])
+    # bd.c.execute(sql, values)
+    bd.cierra()
+    return texto
+
+def puleTexto(texto):
+    return texto.replace('. \n', '.¬').replace(': \n', ':¬').replace('? \n', '?¬')\
+        .replace('\n', '').replace('¬', '\r\n\r\n').replace('  Š','\r\n- ').replace('Š',' - ')\
+        .replace('  ', ' ').replace('  ', ' ')
+
 def LeeUltTextoJ(num):
     bd = DB(nombrebd="textos")
-    rows = bd.Ejecuta("select * from docs where num=%s"%num)
+    # rows = bd.Ejecuta("select * from docs where num=%s"%num)
+    rows = bd.Ejecuta("select parrafos.* from parrafos inner join docs on docs.id=parrafos.iddoc where num=%s"%num)
     bd.cierra()
     return rows
 

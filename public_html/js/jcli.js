@@ -46,7 +46,7 @@ function verArchivo()
 	if (cad[1].toLowerCase() == 'pdf') {		
 		var a = encabezado.split(','), num=5;	
 		$('#subir').attr('action', 'http://142.93.52.198:8083/uploadfile');
-		$("#num").val(randomInt(100));
+		$("#num").val(randomInt(10000));
 		$("#enviar").show();
 		$("#enviar").focus();
 	}
@@ -69,9 +69,11 @@ function enduploadf(datos)
 
 function escribeTexto(datos)
 {
-	var texto = datos[0].texto;
+	var texto = datos[0];
 	/*texto = texto.split('\r\n').join('<br />'); // replace all*/
 	$("#texto").show();
-	$("#texto").val(texto);
+	$("#texto1").show();
+	$("#texto").val(texto.texto);
+	$("#texto1").val(texto.textoc);
 }
 
